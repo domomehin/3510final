@@ -53,10 +53,10 @@ class Generator():
         """
         returns coordinates of a safe square of form: (x,y)
         """
-        while True:
-            loc = (random.randint(0, len(self.board)-1),random.randint(0, len(self.board[0])-1))
-            if self.board[loc[0]][loc[1]] != 9:
-                return (loc[1], loc[0])
+        c, i = max([(c, i) for i, c in enumerate(self.stringify()) if c < '9'])
+        
+        return (int(i / self.width), i % self.width)
+    
     def stringify(self):
         """return 1d string representation of generated board"""
         ret = ""
@@ -67,7 +67,7 @@ class Generator():
        
     def writeToJson(self, jsonFile):
         data = {}
-        data["dim"] = str(self.width) +"," +str(self.height)
+        data["dim"] = str(self.height) +"," +str(self.width)
         data["bombs"] = str(self.bomb_count)
         loc = self.getSafeSq()
         data["safe"] = str(loc[0]) + "," + str(loc[1])
