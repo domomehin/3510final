@@ -60,7 +60,7 @@ class Window(Frame):
         self.create_board()
         AIAlgo1Button = Button(self, bg="blue", text="AI 1", width=6, height=5, command=self.AIAlgo1)
         AIAlgo1Button.place(x=600, y=150)
-        self.AI1 = minesweeperAI1.AI1(self.numRows, self.numCols, self.numBombs, self.safeSquare)
+        self.AI1 = minesweeperAI1.AI1(self.numRows, self.numCols, self.numBombs, self.safeSquare, self.ans)
 
         AIAlgo2Button = Button(self, bg="blue", text="AI 2", width=6, height=5, command=self.AIAlgo2)
         AIAlgo2Button.place(x=600, y=350)
