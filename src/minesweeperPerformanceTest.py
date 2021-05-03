@@ -290,21 +290,33 @@ elif sys.argv[1] in ["--generate", "-g"] and len(sys.argv) == 9:
 
     print(f"totalDigs={totalDigs}, averageDigs={totalDigs/numGames}, totalTime={round(totalTime, 3)}, averageTime={round(totalTime/numGames, 3)}, numberOfTimeCorrectBombListReturned={numWins}, numberOfTimeIncorrectBombListReturned={numLosses}")    
 
-elif sys.argv[1] in ["--file", "-f"] and len(sys.argv) == 4:
-    root = Tk()
-    root.geometry("800x800")
+elif sys.argv[1] in ["--file", "-f"] and len(sys.argv) == 5:
+    numGames = int(sys.argv[4])
+    numWins = 0
+    numLosses = 0
+    totalDigs = 0
+    totalTime = 0
+    for i in range(numGames):
+        print(f"match={i+1}")
+        root = Tk()
+        root.geometry("800x800")
     
-    app = Window(master = root)
-    app.setupFile(testcase_filename = sys.argv[2], AIType = int(sys.argv[3]))
-    root.mainloop()    
+        app = Window(master = root)
+        app.setupFile(testcase_filename = sys.argv[2], AIType = int(sys.argv[3]))
+        root.mainloop()    
 
-    outcome = "ERROR"
-    if app.outcome == -1: 
-        outcome = "Incorrect Bomb List"
-    elif app.outcome == 1:
-        outcome = "Correct Bomb List"
+        outcome = "ERROR"
+        totalDigs += app.numDigs
+        totalTime += app.time
+        if app.outcome == -1: 
+            outcome = "Incorrect Bomb List"
+            numLosses += 1
+        elif app.outcome == 1:
+            outcome = "Correct Bomb List"
+            numWins += 1
+        print("\n************\n")
 
-    print(f"totalDigs={app.numDigs}, totalTime={round(app.time, 3)}, outcome={outcome}")    
+    print(f"averageDigs={totalDigs/numGames}, averageTime={round(totalTime/numGames, 3)}, numberOfTimeCorrectBombListReturned={numWins}, numberOfTimeIncorrectBombListReturned={numLosses}")    
 
 else:
-    print("usage: -f <file_name.json> <algoType>, or -g <x_dim> <y_dim> <num_bombs> <safe_x> <safe_y> <algoType> <numGames>")
+    print("usage: -f <file_name.json> <algoType> <numGames>, or -g <x_dim> <y_dim> <num_bombs> <safe_x> <safe_y> <algoType> <numGames>")
