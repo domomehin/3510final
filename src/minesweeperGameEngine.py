@@ -188,14 +188,14 @@ class Window(Frame):
             return # game is already over (won or loss)
 
         boardState = self.getBoardState()
-        userCommand = self.AI1.performAI(boardState)
+        userCommand = self.AI2.performAI(boardState)
         self.parseAIAlgo(userCommand)
 
 root = Tk()
 root.geometry("800x800")
 
 parser = argparse.ArgumentParser()
-parser.add_argument('-f', default = 'test_board.json', type=str, help='the filename (or filepath) of the minesweeper board')
+parser.add_argument('-f', default = 'test_board.json', type=str, help='10rows_10cols_10d_1.json')
 args = parser.parse_args()
 
 app = Window(testcase_filename = args.f, master = root)

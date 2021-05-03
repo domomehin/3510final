@@ -5,7 +5,7 @@ str_index = 0
 
 bomb_count = 5
 class Generator():
-
+    
     def __init__(self, bomb_count, height, width):
         self.bomb_count = bomb_count
         self.height = height
@@ -17,6 +17,16 @@ class Generator():
                 if self.board[loc[0]][loc[1]] != 9:
                     self.board[loc[0]][loc[1]] = 9
                     break
+        """
+        #initialize the probabilities
+        for x in range(0, height):
+            for y in range(0, width):
+                if self.board[x][y] == 9:
+                    probMatrix[x][y] = 1
+                else:
+                    probMatrix[x][y] = 0
+        """
+        
         self.display_board()
         self.numerize()
         self.display_board()

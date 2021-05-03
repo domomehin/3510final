@@ -11,7 +11,7 @@ import json
 # Here, we are creating our class, Window, and inheriting from the Frame
 # class. Frame is a class from the tkinter module. (see Lib/tkinter/__init__)
 class Window(Frame):
-
+    sys.setrecursionlimit(2000)
     # Define settings upon initialization. Here you can specify
     def __init__(self, master=None):
         # parameters that you want to send through the Frame class. 
